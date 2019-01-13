@@ -1,21 +1,28 @@
-const getRandomID = require('../../utils/idUtil');
 const Controller = require('egg').Controller;
+const ResponseConstans = require('../../utils/ResponseConstans');
+const MyResult = require('../../model/MyResult')
 class StateManagerController extends Controller {
     async login() {
+        let self = this
         console.log('in login')
         const { ctx } = this;
         const { userid, password } = ctx.request.body;
-        console.log(userid)
-        console.log(password)
+        const myResult = new MyResult()
         try {
-            const user = await ctx.service.commonModel.stateManager.login(userid, password);
-            ctx.body = {
-                data: user,
-                message: 'success',
-            };
+            const data = await ctx.service.commonModel.stateManager.login(userid, password);
+            if (data === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('未匹配').setData(data)
+                ctx.body = myResult.getResult()
+                return
+            }
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('成功').setData(data)
+            ctx.body = myResult.getResult()
         }catch (e) {
             console.log(e);
             console.log("失败");
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('失败').setData(admin)
+            ctx.body = myResult.getResult()
+            return
         }
     }
     async insertAdmin () {

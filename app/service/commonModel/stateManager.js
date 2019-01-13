@@ -1,6 +1,5 @@
 const getRandomID = require('../../utils/idUtil');
 
-
 const Service = require('egg').Service;
 class AdminService extends Service {
     // 默认不需要提供构造函数。
@@ -15,11 +14,7 @@ class AdminService extends Service {
         if (typeof admin === "undefined") {
             throw new Error("Non-existent");
         }
-        if (admin === null) {
-            return "未匹配到数据"
-        }
-        console.log(admin)
-        return admin;
+        return admin
     }
 
     async insertAdmin(password) {
