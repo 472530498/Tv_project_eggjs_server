@@ -12,12 +12,3 @@ exports.cors = {
     enable: true,
     package: 'egg-cors',
 };
-
-// exports.csrf = {
-//     enable:false
-// };
-
-// exports.uuid = {
-//     enable: true,
-//     package: 'node-uuid',
-// };

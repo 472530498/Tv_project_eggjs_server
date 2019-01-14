@@ -27,8 +27,15 @@ module.exports = appInfo => {
     }
 
     config.cors = {
+        credentials: true,
         origin: '*',
         allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
     }
+
+    // config.csrf = {
+    //     enable: false,
+    //         headerName: 'x-csrf-token',
+    //         ignoreJSON: false
+    // }
     return config;
 };
