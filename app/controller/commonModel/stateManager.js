@@ -20,7 +20,7 @@ class StateManagerController extends Controller {
         }catch (e) {
             console.log(e);
             console.log("失败");
-            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('失败').setData(admin)
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('失败').setData(e)
             ctx.body = myResult.getResult()
             return
         }

@@ -30,17 +30,17 @@
 // }
 
 module.exports = class MyResult {
-    constructor(resultCode, resultMsg, Data) {
+    constructor(resultCode, resultMsg, data) {
         this.resultCode = resultCode
         this.resultMsg = resultMsg
-        this.Data = Data
+        this.data = data
     }
 
     getResult() {
         return {
             resultCode: this.resultCode,
             resultMsg: this.resultMsg,
-            Data: this.Data
+            data: this.data
         }
     }
 
@@ -54,39 +54,8 @@ module.exports = class MyResult {
         return this
     }
 
-    setData(Data) {
-        this.Data = Data
+    setData(data) {
+        this.data = data
         return this
     }
 }
-
-// module.exports = {
-//     constructor(resultCode, resultMsg, Data) {
-//         this.resultCode = resultCode
-//         this.resultMsg = resultMsg
-//         this.Data = Data
-//     },
-//
-//     getResult() {
-//         return {
-//             resultCode: this.resultCode,
-//             resultMsg: this.resultMsg,
-//             Data: this.Data
-//         }
-//     },
-//
-//     setResultCode(resultCode) {
-//         this.resultCode = resultCode
-//         return this
-//     },
-//
-//     setResultMsg(resultMsg) {
-//         this.resultMsg = resultMsg
-//         return this
-//     },
-//
-//     setData(Data) {
-//         this.Data = Data
-//         return this
-//     }
-// }
