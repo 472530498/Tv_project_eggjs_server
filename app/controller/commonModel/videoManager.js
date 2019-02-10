@@ -7,13 +7,13 @@ class VideoManagerController extends Controller {
         const { } = ctx.request.body;
         const myResult = new MyResult()
         try {
-            const data = await ctx.service.commonModel.videoManager.selectVideoAll();
-            if (data === null) {
-                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(data)
+            const result = await ctx.service.commonModel.videoManager.selectVideoAll();
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(result)
                 ctx.body = myResult.getResult()
                 return
             }
-            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('查询成功').setData(data)
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('查询成功').setData(result)
             ctx.body = myResult.getResult()
         }catch (e) {
             console.log(e);
@@ -27,17 +27,18 @@ class VideoManagerController extends Controller {
     async insertVideo () {
         const { ctx } = this;
         const { insertData } = ctx.request.body;
+        console.log(insertData)
         const myResult = new MyResult()
         try{
             // const insertData = ctx.request.query.insertData;
             // console.log(password)
-            const data = await ctx.service.commonModel.videoManager.insertVideo(insertData)
-            if (data === null) {
-                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('更新失败').setData(data)
+            const result = await ctx.service.commonModel.videoManager.insertVideo(insertData)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('新增失败').setData(result)
                 ctx.body = myResult.getResult()
                 return
             }
-            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('更新成功').setData(data)
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('新增成功').setData(result)
             ctx.body = myResult.getResult()
         }catch (e) {
             console.log(e);
@@ -50,16 +51,16 @@ class VideoManagerController extends Controller {
 
     async updateVideo () {
         const { ctx } = this;
-        const { vid, insertData } = ctx.request.body;
+        const { updateData } = ctx.request.body;
         const myResult = new MyResult()
         try{
-            const data = await ctx.service.commonModel.videoManager.updateVideo(vid, insertData)
-            if (data === null) {
-                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('更新失败').setData(data)
+            const result = await ctx.service.commonModel.videoManager.updateVideo(updateData)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('更新失败').setData(result)
                 ctx.body = myResult.getResult()
                 return
             }
-            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('更新成功').setData(data)
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('更新成功').setData(result)
             ctx.body = myResult.getResult()
         }catch (e) {
             console.log(e);
@@ -72,15 +73,19 @@ class VideoManagerController extends Controller {
 
     async deleteVideo () {
         const { ctx } = this;
-        const vid = ctx.request.query.vid;
+        const vid = ctx.params.video_source_id;
+        const myResult = new MyResult()
         try{
-            const data = await ctx.service.commonModel.videoManager.deleteVideo(vid)
-            if (data === null) {
-                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('删除失败').setData(data)
+            if (typeof vid === 'undefined') {
+                throw new Error('vid none exist')
+            }
+            const result = await ctx.service.commonModel.videoManager.deleteVideo(vid)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('删除失败').setData(result)
                 ctx.body = myResult.getResult()
                 return
             }
-            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('删除成功').setData(data)
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('删除成功').setData(result)
             ctx.body = myResult.getResult()
         }catch (e) {
             console.log(e);

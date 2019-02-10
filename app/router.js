@@ -5,8 +5,10 @@
  */
 module.exports = app => {
     const {router, controller} = app;
-    router.get('/', controller.home.index);
-    router.get('insert', '/api/posts/insert', controller.post.insert);
     router.post('/commonModel/stateManager/login', controller.commonModel.stateManager.login);
     router.post('/commonModel/stateManager/insert', controller.commonModel.stateManager.insertAdmin);
+    router.get('/commonModel/videoManager/selectVideoAll', controller.commonModel.videoManager.selectVideoAll);
+    router.post('/commonModel/videoManager/insertVideo', controller.commonModel.videoManager.insertVideo);
+    router.post('/commonModel/videoManager/updateVideo', controller.commonModel.videoManager.updateVideo);
+    router.get('/commonModel/videoManager/deleteVideo/:video_source_id', controller.commonModel.videoManager.deleteVideo);
 };
