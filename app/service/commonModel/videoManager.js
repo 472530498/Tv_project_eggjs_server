@@ -17,6 +17,17 @@ class VideoService extends Service {
         return result
     }
 
+    async selectVideoFromTo(limit, offset) {
+        const result = await this.app.mysql.select('video',  { // 搜索 post 表
+            limit: limit, // 返回数据量
+            offset: offset, // 数据偏移量
+        })
+        if (typeof result === "undefined") {
+            throw new Error("Non-existent");
+        }
+        return result
+    }
+
     async insertVideo(insertData) {
         const result = await this.app.mysql.insert('video', {
                 video_source_id: uuidv1(),

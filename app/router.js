@@ -8,6 +8,7 @@ module.exports = app => {
     router.post('/commonModel/stateManager/login', controller.commonModel.stateManager.login);
     router.post('/commonModel/stateManager/insert', controller.commonModel.stateManager.insertAdmin);
     router.get('/commonModel/videoManager/selectVideoAll', controller.commonModel.videoManager.selectVideoAll);
+    router.post('/commonModel/videoManager/selectVideoFromTo', controller.commonModel.videoManager.selectVideoFromTo);
     router.post('/commonModel/videoManager/insertVideo', controller.commonModel.videoManager.insertVideo);
     router.post('/commonModel/videoManager/updateVideo', controller.commonModel.videoManager.updateVideo);
     router.get('/commonModel/videoManager/deleteVideo/:video_source_id', controller.commonModel.videoManager.deleteVideo);

@@ -24,6 +24,28 @@ class VideoManagerController extends Controller {
         }
     }
 
+    async selectVideoFromTo () {
+        const { ctx } = this;
+        const { limit, offset } = ctx.request.body;
+        const myResult = new MyResult()
+        try {
+            const result = await ctx.service.commonModel.videoManager.selectVideoFromTo(limit, offset);
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(result)
+                ctx.body = myResult.getResult()
+                return
+            }
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('查询成功').setData(result)
+            ctx.body = myResult.getResult()
+        }catch (e) {
+            console.log(e);
+            console.log("失败");
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('查询失败').setData(e)
+            ctx.body = myResult.getResult()
+            return
+        }
+    }
+
     async insertVideo () {
         const { ctx } = this;
         const { insertData } = ctx.request.body;
