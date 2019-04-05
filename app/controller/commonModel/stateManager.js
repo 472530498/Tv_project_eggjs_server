@@ -47,9 +47,31 @@ class StateManagerController extends Controller {
         ctx.body = myResult.getResult()
     }
 
-    async index() {
-        this.ctx.body = 'hi, egg';
-        // ctx.response.body = "hi";
+    async changeAdminPassword () {
+        const { ctx } = this;
+        const { updateData } = ctx.request.body;
+        const myResult = new MyResult()
+        try{
+            const old = updateData.old
+            const row = {
+                admin_rid: updateData.admin_rid,
+                admin_password: updateData.admin_password
+            };
+            const result = await ctx.service.commonModel.stateManager.changeAdminPassword(row, old)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('更新失败').setData(result)
+                ctx.body = myResult.getResult()
+                return
+            }
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('更新成功').setData(result)
+            ctx.body = myResult.getResult()
+        }catch (e) {
+            console.log(e);
+            console.log("失败");
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('失败').setData(e)
+            ctx.body = myResult.getResult()
+            return
+        }
     }
 }
 

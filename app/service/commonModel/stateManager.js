@@ -27,5 +27,24 @@ class AdminService extends Service {
         result['admin_rid'] = admin_rid
         return result
     }
+
+    async changeAdminPassword (updateData, old) {
+        console.log('changeAdminPassword', updateData)
+        const options = {
+            where: {
+                admin_rid: updateData.admin_rid,
+                admin_password: old
+            }
+        };
+        const postId = 1;
+        const result = await this.app.mysql.query('update admin_manager set admin_password = \'' + updateData.admin_password + '\' where admin_rid = \'' + updateData.admin_rid + '\' and admin_password = \'' + old + '\'', [1, postId]);
+        // const result = await this.app.mysql.update('admin_manager', updateData, options)
+        // 判断更新成功
+        const updateSuccess = result.affectedRows === 1;
+        if (!updateSuccess) {
+            throw new Error("Non-existent");
+        }
+        return result
+    }
 }
 module.exports = AdminService;
