@@ -8,6 +8,7 @@ class VideoManagerController extends Controller {
         const myResult = new MyResult()
         try {
             const result = await ctx.service.commonModel.videoManager.selectVideoAll();
+            console.log(result)
             if (result === null) {
                 myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(result)
                 ctx.body = myResult.getResult()
@@ -30,6 +31,7 @@ class VideoManagerController extends Controller {
         const myResult = new MyResult()
         try {
             const result = await ctx.service.commonModel.videoManager.selectVideoFromTo(limit, offset);
+            console.log(result)
             if (result === null) {
                 myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(result)
                 ctx.body = myResult.getResult()
