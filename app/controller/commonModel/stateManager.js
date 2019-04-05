@@ -27,19 +27,24 @@ class StateManagerController extends Controller {
     }
     async insertAdmin () {
         const { ctx } = this;
-        // const self = this
-        let res = '1231312'
+        const myResult = new MyResult()
+        let res
         try{
-            const password = ctx.request.query.password;
-            console.log(password)
+            let password = ctx.request.query.password;
+            if (typeof password === 'undefined') {
+                password = '000000' // 增加管理员的默认密码
+                console.log('接收增加管理成员请求,为默认密码,时间:    ' + new Date())
+            }
             res = await ctx.service.commonModel.stateManager.insertAdmin(password);
-            // console.log(self.res)
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('增加成功').setData(res)
+
         }catch (e) {
             console.log("失败")
             console.log(e)
             ctx.response.body = "失败";
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('增加失败').setData(e)
         }
-        ctx.response.body = res;
+        ctx.body = myResult.getResult()
     }
 
     async index() {

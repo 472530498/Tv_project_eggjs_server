@@ -24,11 +24,8 @@ class AdminService extends Service {
         if (!insertSuccess) {
             throw new Error("insert-fail");
         }
-        return {
-            resultMsg: "成功",
-            resultCode: "1",
-            data: result,
-        };
+        result['admin_rid'] = admin_rid
+        return result
     }
 }
 module.exports = AdminService;
