@@ -73,6 +73,29 @@ class StateManagerController extends Controller {
             return
         }
     }
+
+    async selectAllAdmin () {
+        const { ctx } = this;
+        const { } = ctx.request.body;
+        const myResult = new MyResult()
+        try {
+            const result = await ctx.service.commonModel.stateManager.selectAllAdmin();
+            console.log(result)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('数据为空').setData(result)
+                ctx.body = myResult.getResult()
+                return
+            }
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('查询成功').setData(result)
+            ctx.body = myResult.getResult()
+        }catch (e) {
+            console.log(e);
+            console.log("失败");
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('查询失败').setData(e)
+            ctx.body = myResult.getResult()
+            return
+        }
+    }
 }
 
 module.exports = StateManagerController;

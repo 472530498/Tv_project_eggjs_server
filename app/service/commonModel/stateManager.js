@@ -46,5 +46,15 @@ class AdminService extends Service {
         }
         return result
     }
+
+    async selectAllAdmin () {
+        const result = await this.app.mysql.select('admin_manager', { // 搜索 post 表
+            columns: ['admin_rid', 'admin_username', 'admin_created_time', 'admin_action_id', 'admin_action_name'], // 要查询的表字段
+        });
+        if (typeof result === "undefined") {
+            throw new Error("Non-existent");
+        }
+        return result
+    }
 }
 module.exports = AdminService;
