@@ -56,5 +56,20 @@ class AdminService extends Service {
         }
         return result
     }
+
+    async changeActionId (updateData) {
+        const options = {
+            where: {
+                admin_rid: updateData.admin_rid
+            }
+        };
+        const result = await this.app.mysql.update('admin_manager', updateData, options)
+        // 判断更新成功
+        const updateSuccess = result.affectedRows === 1;
+        if (!updateSuccess) {
+            throw new Error("Non-existent");
+        }
+        return result
+    }
 }
 module.exports = AdminService;
