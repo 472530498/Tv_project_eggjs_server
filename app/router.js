@@ -16,4 +16,6 @@ module.exports = app => {
     router.get('/commonModel/videoManager/deleteVideo/:video_source_id', controller.commonModel.videoManager.deleteVideo);
     router.get('/commonModel/stateManager/selectAllAdmin', controller.commonModel.stateManager.selectAllAdmin);
     router.post('/commonModel/stateManager/changeActionId', controller.commonModel.stateManager.changeActionId);
+    router.post('/commonModel/userManager/insertUser', controller.commonModel.userManager.insertUser)
+    router.post('/commonModel/userManager/login', controller.commonModel.userManager.login)
 };
