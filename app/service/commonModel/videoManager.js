@@ -33,7 +33,9 @@ class VideoService extends Service {
                 video_source_id: uuidv1(),
                 video_name: insertData.video_name,
                 video_url: insertData.video_url,
-                video_created_time: new Date()
+                video_created_time: new Date(),
+                video_zone_tags_id: insertData.video_zone_tags_id,
+                video_zone_tags_name: insertData.video_zone_tags_name
             })
         // 判断插入成功
         const insertSuccess = result.affectedRows === 1;
