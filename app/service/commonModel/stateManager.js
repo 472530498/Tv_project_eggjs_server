@@ -71,5 +71,17 @@ class AdminService extends Service {
         }
         return result
     }
+
+    async deleteAdmin(admin_rid) {
+        console.log(admin_rid)
+        const result = await this.app.mysql.delete('admin_manager', {
+            admin_rid: admin_rid,
+        })
+        console.log(result)
+        if (result.affectedRows === 0) {
+            throw new Error("Non-existent");
+        }
+        return result
+    }
 }
 module.exports = AdminService;

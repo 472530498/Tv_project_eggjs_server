@@ -18,4 +18,5 @@ module.exports = app => {
     router.post('/commonModel/stateManager/changeActionId', controller.commonModel.stateManager.changeActionId);
     router.post('/commonModel/userManager/insertUser', controller.commonModel.userManager.insertUser)
     router.post('/commonModel/userManager/login', controller.commonModel.userManager.login)
+    router.get('/commonModel/stateManager/deleteAdmin/:admin_rid', controller.commonModel.stateManager.deleteAdmin)
 };

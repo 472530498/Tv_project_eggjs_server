@@ -118,6 +118,31 @@ class StateManagerController extends Controller {
             return
         }
     }
+
+    async deleteAdmin () {
+        const { ctx } = this;
+        const vid = ctx.params.admin_rid;
+        const myResult = new MyResult()
+        try{
+            if (typeof vid === 'undefined') {
+                throw new Error('vid none exist')
+            }
+            const result = await ctx.service.commonModel.stateManager.deleteAdmin(vid)
+            if (result === null) {
+                myResult.setResultCode(ResponseConstans.SELECT_FAIL).setResultMsg('删除失败').setData(result)
+                ctx.body = myResult.getResult()
+                return
+            }
+            myResult.setResultCode(ResponseConstans.SUCCESS).setResultMsg('删除成功').setData(result)
+            ctx.body = myResult.getResult()
+        }catch (e) {
+            console.log(e);
+            console.log("失败");
+            myResult.setResultCode(ResponseConstans.FAIL).setResultMsg('失败').setData(e)
+            ctx.body = myResult.getResult()
+            return
+        }
+    }
 }
 
 module.exports = StateManagerController;
